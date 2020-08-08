@@ -1,4 +1,5 @@
 import { config } from "../config";
+import axios from "axios";
 
 export const userService = {
   login,
@@ -13,7 +14,7 @@ function login(username, password) {
     body: JSON.stringify({username, password})
   };
 
-  return fetch(`${config.apiUrl}/auth/sign-in`, requestOptions).then(handleResponse);
+  return fetch(`${config.apiUrl}/v1/auth/sign-in`, requestOptions).then(handleResponse);
 }
 
 function logout() {
@@ -22,13 +23,7 @@ function logout() {
 }
 
 function register(user) {
-  const requestOptions = {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(user)
-  }
-
-  return fetch(`${config.apiUrl}/auth/sign-up`, requestOptions).then(handleResponse);
+  return axios.post(`${config.apiUrl}/v1/auth/sign-up`, user);
 }
 
 function handleResponse(response) {
