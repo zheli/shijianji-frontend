@@ -7,14 +7,8 @@ export const userService = {
   register
 };
 
-function login(username, password) {
-  const requestOptions = {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({username, password})
-  };
-
-  return fetch(`${config.apiUrl}/v1/auth/sign-in`, requestOptions).then(handleResponse);
+function login(email, password) {
+  return axios.post(`${config.apiUrl}/v1/auth/sign-in`, {email: email, password: password});
 }
 
 function logout() {
