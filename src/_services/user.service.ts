@@ -1,5 +1,5 @@
-import { config } from "../config";
 import axios from "axios";
+import { config } from "../config";
 
 export const userService = {
   login,
@@ -8,7 +8,16 @@ export const userService = {
 };
 
 function login(email, password) {
-  return axios.post(`${config.apiUrl}/v1/auth/sign-in`, {email: email, password: password});
+    return axios
+      .post(
+        `${config.apiUrl}/v1/auth/sign-in`,
+        {email: email, password: password},
+        { withCredentials: true })
+      .then(response => {
+        console.log('user sign-in response', response);
+        localStorage.setItem('shijianji-user', JSON.stringify(response));
+        return response.data;
+      });
 }
 
 function logout() {

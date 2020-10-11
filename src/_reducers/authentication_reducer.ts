@@ -1,6 +1,6 @@
 import { userConstants } from "../_constants/users";
 
-let localStorageUser = localStorage.getItem('user')
+let localStorageUser = localStorage.getItem('shijianji-user')
 let user = typeof localStorageUser === 'string' ? JSON.parse(localStorageUser) : null;
 const initialState = user ? {loggedIn: true, user} : {};
 
